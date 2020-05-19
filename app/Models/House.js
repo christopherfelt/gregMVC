@@ -1,12 +1,13 @@
-export default class Car {
+export default class House {
   constructor(data) {
     this.id = data._id;
-    this.make = data.make;
-    this.model = data.model;
+    this.year = data.year;
+    this.bedrooms = data.bedrooms;
+    this.bathrooms = data.bathrooms;
     this.description = data.description || "No Description Provided";
     this.imgUrl = data.imgUrl;
     this.price = data.price;
-    this.year = data.year;
+    this.levels = data.levels;
   }
 
   get Template() {
@@ -15,13 +16,13 @@ export default class Car {
                 <div class="card">
                     <img class="card-img-top" src="${this.imgUrl}" alt="">
                     <div class="card-body">
-                        <h4 class="card-title">Make: ${this.make} | Model: ${this.model} </h4>
+                        <h4 class="card-title">Bedrooms: ${this.bedrooms} | Bathrooms: ${this.bathrooms} </h4>
                         <h5>Year: ${this.year}| Price: ${this.price} </h5>
                         <p class="card-text">${this.description}</p>
-                        <button class="btn btn-success" onclick="app.carsController.bid('${this.id}')">
+                        <button class="btn btn-success" onclick="app.housesController.bid('${this.id}')">
                                Bid
                         </button>
-                        <button class="btn btn-danger" onclick="app.carsController.delete('${this.id}')">
+                        <button class="btn btn-danger" onclick="app.housesController.delete('${this.id}')">
                                Delete
                         </button>
                     </div>

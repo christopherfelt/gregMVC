@@ -4,7 +4,9 @@ let _state = {
   activeValue: new Value({ title: "Value" }),
   /** @type {Value[]} */
   values: [],
-  cars: []
+  cars: [],
+  houses: [],
+  jobs: [],
 };
 
 /** Collection of listeners to be called based on keyed state changes
@@ -13,7 +15,9 @@ let _state = {
 let _listeners = {
   activeValue: [],
   values: [],
-  cars: []
+  cars: [],
+  houses: [],
+  jobs: [],
 };
 
 //NOTE You should not need to change the code from this point down
@@ -67,7 +71,7 @@ class Store {
   commit(prop, data) {
     _validateProp(prop);
     _state[prop] = data;
-    _listeners[prop].forEach(fn => fn());
+    _listeners[prop].forEach((fn) => fn());
   }
 }
 
