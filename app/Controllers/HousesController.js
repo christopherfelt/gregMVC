@@ -2,6 +2,7 @@ import _store from "../store.js";
 import SERVICE from "../Services/HousesService.js";
 
 function _drawHouses() {
+  console.log("draw houses");
   let template = "";
   let houses = _store.State.houses;
   houses.forEach((house) => (template += house.Template));
@@ -11,6 +12,7 @@ function _drawHouses() {
 export default class HousesController {
   constructor() {
     _store.subscribe("houses", _drawHouses);
+    SERVICE.getHouses();
   }
 
   addHouse(event) {

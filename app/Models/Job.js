@@ -1,6 +1,6 @@
 export default class Job {
   constructor(data) {
-    this.id = data._id;
+    this.id = data._id || data.id;
     this.company = data.company;
     this.description = data.description || "No Description Provided";
     this.jobTitle = data.jobTitle;

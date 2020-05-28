@@ -1,6 +1,6 @@
 export default class House {
   constructor(data) {
-    this.id = data._id;
+    this.id = data._id || data.id;
     this.year = data.year;
     this.bedrooms = data.bedrooms;
     this.bathrooms = data.bathrooms;

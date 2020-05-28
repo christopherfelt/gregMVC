@@ -1,8 +1,11 @@
 import Car from "../Models/Car.js";
 import store from "../store.js";
 
+let expressURL = "http://localhost:3000/api/cars";
+let djangoURL = "http://127.0.0.1:8000/api/cars/";
+
 let _api = axios.create({
-  baseURL: "http://bcw-sandbox.herokuapp.com/api/cars",
+  baseURL: djangoURL,
   timeout: 15000,
 });
 
@@ -15,8 +18,8 @@ class CarService {
     _api
       .get()
       .then((res) => {
-        // console.log(res.data.data);
-        let newCars = res.data.data.map((carData) => new Car(carData));
+        console.log(res.data);
+        let newCars = res.data.map((carData) => new Car(carData));
         // console.log(newCars)
         store.commit("cars", newCars);
       })
@@ -49,7 +52,7 @@ class CarService {
       foundCar.price += 100;
       //first argument is whats appended to your url, 2nd arg is the data to be updated with
       _api
-        .put(carId, foundCar)
+        .put(carId + "/", foundCar)
         .then((res) => {
           console.log(res);
           this.getCars();
@@ -61,7 +64,7 @@ class CarService {
   ///api/cars/:carId
   delete(carId) {
     _api
-      .delete(carId)
+      .delete(carId + "/")
       .then((res) => {
         console.log(res.data);
         //NOTE 2 ways of updating data here as well

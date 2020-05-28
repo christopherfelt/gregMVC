@@ -1,8 +1,11 @@
 import store from "../store.js";
 import House from "../Models/House.js";
 
+let expressURL = "http://localhost:3000/api/houses";
+let djangoURL = "http://127.0.0.1:8000/api/houses/";
+
 let _api = axios.create({
-  baseURL: "http://bcw-sandbox.herokuapp.com/api/houses",
+  baseURL: djangoURL,
   timeout: 15000,
 });
 
@@ -15,9 +18,9 @@ class HouseService {
     _api
       .get()
       .then((res) => {
-        // console.log(res.data.data);
-        let newhouses = res.data.data.map((houseData) => new House(houseData));
-        // console.log(newhouses)
+        console.log(res.data);
+        let newhouses = res.data.map((houseData) => new House(houseData));
+        console.log(newhouses);
         store.commit("houses", newhouses);
       })
       .catch((err) => console.error(err));
@@ -33,7 +36,7 @@ class HouseService {
         //NOTE two ways of updating data after a request
         //first way
         //PROS: only one call to db | cons: cant trust that local array contains the same information as database
-        let newhouse = new House(res.data.data);
+        let newhouse = new House(res.data);
         let houses = [newhouse, ...store.State.houses];
         store.commit("houses", houses);
 

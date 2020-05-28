@@ -1,8 +1,11 @@
 import store from "../store.js";
 import Job from "../Models/Job.js";
 
+let expressURL = "http://localHost:3000/api/jobs";
+let djangoURL = "http://127.0.0.1:8000/api/jobs/";
+
 let _api = axios.create({
-  baseURL: "http://bcw-sandbox.herokuapp.com/api/jobs",
+  baseURL: djangoURL,
   timeout: 15000,
 });
 
@@ -36,7 +39,7 @@ class JobsService {
     _api
       .get()
       .then((res) => {
-        let newJobs = res.data.data.map((jobData) => new Job(jobData));
+        let newJobs = res.data.map((jobData) => new Job(jobData));
         store.commit("jobs", newJobs);
       })
       .catch((error) => console.error(error));

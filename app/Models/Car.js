@@ -1,6 +1,6 @@
 export default class Car {
   constructor(data) {
-    this.id = data._id;
+    this.id = data._id || data.id;
     this.make = data.make;
     this.model = data.model;
     this.description = data.description || "No Description Provided";
